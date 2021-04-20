@@ -1,30 +1,28 @@
-import MarsRover from "./marsRover";
-
+import MarsRover, { MoveForward, RotateLeft, RotateRight } from "./marsRover";
 export default class ControlPad {
 
     constructor(private marsRover = new MarsRover()) {
     }
 
-    execute(instructions: any) {
-
-        const instructionsArray = CommandBuilder.buildFrom(instructions)//instructions.split('').map() //Command implementations
-        instructions.each(instruction => instruction.execute())
-        instructionsArray.forEach(instruction => {
-            switch (instruction) {
+    buildFrom(instructions: string[]) {
+        return instructions.map(instruction => {
+               switch (instruction) {
                 case 'L':
-                    this.rotateLeft();
-                    break
+                    return new RotateLeft(this.marsRover)
                 case 'R':
-                    this.rotateRight();
-                    break
+                    return new RotateRight(this.marsRover)
                 case 'M':
-                    this.moveForward();
-                    break
+                    return new MoveForward(this.marsRover)
                 default:
-                    break;
-            }
+                    throw new Error("Invalid instruction");
+            }  
         })
+    }
 
-        return `${this.coordinates.x}:${this.coordinates.y}:${this.orientation}`;
+    execute(instructions: any) {
+        const instructionsArray = this.buildFrom(instructions.split(''))
+        instructionsArray.forEach(instruction => instruction.execute())
+
+        return this.marsRover.getPosition();
     }
 }

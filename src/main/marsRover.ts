@@ -1,11 +1,27 @@
 import MarsPlateau from './marsPlateau';
 
-class rotateLeft implements Command {
+export class RotateLeft implements Command {
     constructor(private marsRover: MarsRover) {
     }
 
     execute() {
         this.marsRover.rotateLeft();
+    }
+}
+export class RotateRight implements Command {
+    constructor(private marsRover: MarsRover) {
+    }
+
+    execute() {
+        this.marsRover.rotateRight();
+    }
+}
+export class MoveForward implements Command {
+    constructor(private marsRover: MarsRover) {
+    }
+
+    execute() {
+        this.marsRover.moveForward();
     }
 }
 
@@ -14,6 +30,10 @@ export default class MarsRover {
         x: 0,
         y: 0
     }, private marsPlateau = new MarsPlateau()) {
+    }
+
+    public getPosition() {
+        return `${this.coordinates.x}:${this.coordinates.y}:${this.orientation}`;
     }
 
     public rotateLeft() {
@@ -37,7 +57,7 @@ export default class MarsRover {
         return this;
     }
 
-    private rotateRight() {
+    public rotateRight() {
         switch (this.orientation) {
             case 'N':
                 this.orientation = 'E';
@@ -58,30 +78,7 @@ export default class MarsRover {
         return this;
     }
 
-    move(instructions: string) {
-        const instructionsArray = instructions.split('')
-
-        instructionsArray.forEach(instruction => {
-            switch (instruction) {
-                case 'L':
-                    this.rotateLeft();
-                    break
-                case 'R':
-                    this.rotateRight();
-                    break
-                case 'M':
-                    this.moveForward();
-                    break
-                default:
-                    break;
-            }
-        })
-
-        return `${this.coordinates.x}:${this.coordinates.y}:${this.orientation}`;
-    }
-
-
-    private moveForward() {
+    public moveForward() {
         if (this.orientation === 'N') {
             if (this.coordinates.y === this.marsPlateau.maxHeight - 1) {
                 this.coordinates.y = 0;
