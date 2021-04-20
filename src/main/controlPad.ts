@@ -1,18 +1,29 @@
 import MarsRover, { MoveForward, RotateLeft, RotateRight } from "./marsRover";
 export default class ControlPad {
 
-    constructor(private marsRover = new MarsRover()) {
+    constructor(private marsRover = new MarsRover(), private instructionHistory: Command[] = []) {
     }
 
     buildFrom(instructions: string[]) {
         return instructions.map(instruction => {
                switch (instruction) {
                 case 'L':
-                    return new RotateLeft(this.marsRover)
+                    const rotateLeftCommand = new RotateLeft(this.marsRover);
+                    this.instructionHistory.push(rotateLeftCommand)
+                    return rotateLeftCommand
                 case 'R':
-                    return new RotateRight(this.marsRover)
+                    const rotateRightCommand = new RotateRight(this.marsRover);
+                    this.instructionHistory.push(rotateRightCommand)
+                    return rotateRightCommand
                 case 'M':
-                    return new MoveForward(this.marsRover)
+                    const moveCommand = new MoveForward(this.marsRover);
+                    this.instructionHistory.push(moveCommand)
+                    return moveCommand
+               case 'U':
+                   const lastCommand = this.instructionHistory.pop();
+                    if( lastCommand instanceof RotateRight){
+                        return new RotateLeft(this.marsRover);
+                    }
                 default:
                     throw new Error("Invalid instruction");
             }  

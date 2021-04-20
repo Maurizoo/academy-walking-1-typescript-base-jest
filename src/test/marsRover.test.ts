@@ -11,6 +11,7 @@ describe('Mars Rover', () => {
             ${'RRR'}     | ${'0:0:W'}
             ${'RRRR'}    | ${'0:0:N'}
             ${'LRLRLRR'} | ${'0:0:E'}
+            ${'RU'}      | ${'0:0:N'}
     `('should be in position $expectedOrientation when given $instructions',
         ({instructions, expectedOrientation}) => {
             const controlPad = new ControlPad();
