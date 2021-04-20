@@ -7,6 +7,7 @@ export default class MarsRover {
     }, private marsPlateau = new MarsPlateau()) {
     }
 
+    //Is this a command?
     private rotateLeft() {
         switch (this.orientation) {
             case 'N':
