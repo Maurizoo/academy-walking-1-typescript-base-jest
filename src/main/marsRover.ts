@@ -1,5 +1,14 @@
 import MarsPlateau from './marsPlateau';
 
+class rotateLeft implements Command {
+    constructor(private marsRover: MarsRover) {
+    }
+
+    execute() {
+        this.marsRover.rotateLeft();
+    }
+}
+
 export default class MarsRover {
     constructor(private orientation = 'N', private coordinates = {
         x: 0,
@@ -7,8 +16,7 @@ export default class MarsRover {
     }, private marsPlateau = new MarsPlateau()) {
     }
 
-    //Is this a command?
-    private rotateLeft() {
+    public rotateLeft() {
         switch (this.orientation) {
             case 'N':
                 this.orientation = 'W';

@@ -1,4 +1,4 @@
-import MarsRover from '../main/marsRover';
+import ControlPad from '../main/controlPad';
 
 describe('Mars Rover', () => {
     it.each`instructions | expectedOrientation 
@@ -13,50 +13,50 @@ describe('Mars Rover', () => {
             ${'LRLRLRR'} | ${'0:0:E'}
     `('should be in position $expectedOrientation when given $instructions',
         ({instructions, expectedOrientation}) => {
-            const marsRover = new MarsRover();
+            const controlPad = new ControlPad();
 
-            expect(marsRover.move(instructions)).toBe(expectedOrientation);
+            expect(controlPad.execute(instructions)).toBe(expectedOrientation);
         });
 
     it('should be in position 0:1:N when given instruction M', () => {
-        const marsRover = new MarsRover();
+        const controlPad = new ControlPad();
 
-        expect(marsRover.move('M')).toBe('0:1:N');
+        expect(controlPad.execute('M')).toBe('0:1:N');
     })
 
     it('should be in position 1:0:N when given instruction RM', () => {
-        const marsRover = new MarsRover();
+        const controlPad = new ControlPad();
 
-        expect(marsRover.move('RM')).toBe('1:0:E');
+        expect(controlPad.execute('RM')).toBe('1:0:E');
     })
 
     it('should be in position 2:1:E when given instruction MRMM', () => {
-        const marsRover = new MarsRover();
+        const controlPad = new ControlPad();
 
-        expect(marsRover.move('MRMM')).toBe('2:1:E');
+        expect(controlPad.execute('MRMM')).toBe('2:1:E');
     })
 
     it('should be in position 0:0:N when given instruction MMMMMMMMMM', () => {
-        const marsRover = new MarsRover();
+        const controlPad = new ControlPad();
 
-        expect(marsRover.move('MMMMMMMMMM')).toBe('0:0:N');
+        expect(controlPad.execute('MMMMMMMMMM')).toBe('0:0:N');
     })
 
     it('should be in position 0:0:E when given instruction RMMMMMMMMMM', () => {
-        const marsRover = new MarsRover();
+        const controlPad = new ControlPad();
 
-        expect(marsRover.move('RMMMMMMMMMM')).toBe('0:0:E');
+        expect(controlPad.execute('RMMMMMMMMMM')).toBe('0:0:E');
     })
 
     it('should be in position 0:9:S when given instruction RRM', () => {
-        const marsRover = new MarsRover();
+        const controlPad = new ControlPad();
 
-        expect(marsRover.move('RRM')).toBe('0:9:S');
+        expect(controlPad.execute('RRM')).toBe('0:9:S');
     })
 
     it('should be in position 9:0:W when given instruction LM', () => {
-        const marsRover = new MarsRover();
+        const controlPad = new ControlPad();
 
-        expect(marsRover.move('LM')).toBe('9:0:W');
+        expect(controlPad.execute('LM')).toBe('9:0:W');
     })
 })
