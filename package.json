@@ -5,7 +5,7 @@
   "main": "./build/index.js",
   "types": "./build/index.d.ts",
   "scripts": {
-    "start": "jest --",
+    "start": "jest",
     "watch": "jest --watch --",
     "watch-all": "jest --watchAll"
   },
