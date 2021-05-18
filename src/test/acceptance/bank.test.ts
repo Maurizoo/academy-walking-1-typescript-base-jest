@@ -1,11 +1,13 @@
 import {mock} from 'jest-mock-extended';
 import {Bank} from "../../main/bank";
 import {Logger} from "../../main/logger";
+import { Repository } from '../../main/repository';
 
 
 describe('Bank Account Acceptance Test', () => {
     describe('when a customer makes a series of transactions', () => {
         const logger = mock<Logger>();
+        const repository = mock<Repository>();
         const bank = new Bank(logger, repository);
 
         it('should show the transactions in the bank statement', () => {

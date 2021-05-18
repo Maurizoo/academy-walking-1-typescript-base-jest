@@ -14,4 +14,15 @@ describe('Bank Account', () => {
             expect(repository.save).toHaveBeenCalledWith(1000);
         })
     })
+    
+    describe('When 500 is withdrawn', () => {
+        it("should call the repository with -500", () => {
+            let logger = mock<Logger>();
+            let repository = mock<Repository>();
+            const bank = new Bank(logger, repository);
+
+            bank.withdraw(500);
+            expect(repository.save).toHaveBeenCalledWith(-500);
+        })
+    })
 });
