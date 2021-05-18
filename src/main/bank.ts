@@ -7,7 +7,7 @@ export class Bank {
     }
 
     deposit(amount: number) {
-        throw new Error('error')
+        this.repository.save(amount);
     }
 
     withdraw(amount: number) {
